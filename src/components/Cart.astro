@@ -1,5 +1,44 @@
+---
+import CartProduct from "./CartProduct.astro";
+
+const ProductsData = [
+  {
+    rutaImg: "./collage.jpg",
+    title: "Collage tempuria",
+    value: 25000,
+  },
+  {
+    rutaImg: "./collage.jpg",
+    title: "Temperas estela",
+    value: 35000,
+  },
+  {
+    rutaImg: "./collage.jpg",
+    title: "Monalisa astro",
+    value: 100000,
+  },
+];
+---
+
 <div class="main-container-cart">
-  <h1>AQUÍ VA A IR EL CARRO</h1>
+  <div class="cart">
+    <div class="content">
+      <div class="title">
+        <h3>Carrito de compras</h3>
+      </div>
+      <div class="products-container">
+        {
+          ProductsData.map((item) => (
+            <CartProduct
+              imgRuta={item.rutaImg}
+              title={item.title}
+              value={item.value}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -10,6 +49,25 @@
     justify-content: center;
     width: 30%;
     height: calc(100vh - 80px);
-    background-color: aqua;
+  }
+  .cart {
+    height: 95%;
+    width: 95%;
+    border: 2px solid #d2d2d2;
+    border-radius: 16px;
+    box-shadow: 0px 3px 6px #00000029;
+    background: #fcfcfc;
+  }
+  .content {
+    margin: 15px;
+  }
+  .title h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .products-container {
+    width: 100%;
+    height: 100%;
   }
 </style>

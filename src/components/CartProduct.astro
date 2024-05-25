@@ -1,0 +1,154 @@
+---
+export interface Props {
+  imgRuta: string;
+  title: string;
+  value: number;
+}
+
+const { imgRuta, title, value } = Astro.props;
+---
+
+<div class="product-container">
+  <div class="img-container">
+    <img src={imgRuta} alt="" />
+  </div>
+  <div class="menu">
+    <div class="title-product">
+      <h3>{title}</h3>
+    </div>
+    <div class="operations">
+      <div class="btn-operation" id="decrement">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+          ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"
+          ></path></svg
+        >
+      </div>
+      <span class="counter" id="counter">1</span>
+      <div class="btn-operation" id="increment">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+          ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+          ></path></svg
+        >
+      </div>
+    </div>
+  </div>
+  <div class="result">
+    $ <span id="final-value">{value}</span>
+  </div>
+</div>
+
+<script>
+  let counter = document.getElementById("counter") as HTMLDivElement;
+  let incrementButton = document.getElementById(
+    "increment"
+  ) as HTMLButtonElement;
+  let decrementButton = document.getElementById(
+    "decrement"
+  ) as HTMLButtonElement;
+  let value = document.getElementById("final-value") as HTMLDivElement;
+  let baseValue = parseInt(value.textContent || "0");
+
+  incrementButton?.addEventListener("click", function () {
+    let currentValue = parseInt(counter.textContent || "0");
+    if (!isNaN(currentValue)) {
+      counter.textContent = (currentValue + 1).toString();
+      if (!isNaN(baseValue)) {
+        let finalValue = baseValue * parseInt(counter.textContent || "0");
+        value.textContent = finalValue.toString();
+      }
+    }
+  });
+
+  decrementButton?.addEventListener("click", function () {
+    let currentValue = parseInt(counter.textContent || "0");
+    if (!isNaN(currentValue) && currentValue > 1) {
+      counter.textContent = (currentValue - 1).toString();
+      if (!isNaN(baseValue)) {
+        let finalValue = baseValue * parseInt(counter.textContent || "0");
+        value.textContent = finalValue.toString();
+      }
+    }
+  });
+</script>
+
+<style>
+  .product-container {
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    align-items: center;
+    height: 90px;
+    width: 100%;
+    margin: 15px 0px;
+  }
+  .img-container {
+    margin: 0px 15px;
+    height: 80px;
+    width: 80px;
+  }
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .title-product {
+    width: 100%;
+    height: fit-content;
+  }
+  .title-product h3 {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0px;
+    margin-bottom: 5px;
+  }
+  .operations {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .operations p {
+    margin: 0px;
+  }
+  .btn-operation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    width: 15px;
+    padding: 5px;
+    border: 3px solid #000;
+    border-radius: 12px;
+    margin: 0px 15px;
+  }
+  .btn-operation:hover {
+    color: #ffb24e;
+    border-color: #ffb24e;
+    cursor: pointer;
+    transition: 0.8s;
+  }
+  .btn-operation:hover svg {
+    fill: #ffb24e;
+    cursor: pointer;
+    transition: 0.8s;
+  }
+  .counter {
+    font-weight: 500;
+    font-size: 25px;
+  }
+  .result {
+    color: #ffb24e;
+    position: absolute;
+    right: 20px;
+  }
+  .result span {
+    color: #000;
+  }
+</style>
