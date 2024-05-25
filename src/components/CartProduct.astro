@@ -1,11 +1,17 @@
 ---
 export interface Props {
+  id: number;
   imgRuta: string;
   title: string;
   value: number;
 }
 
-const { imgRuta, title, value } = Astro.props;
+const { id, imgRuta, title, value } = Astro.props;
+
+let counterId = `counter-${id}`;
+let incrementButtonId = `increment-${id}`;
+let decrementButtonId = `decrement-${id}`;
+let valueId = `final-value-${id}`;
 ---
 
 <div class="product-container">
@@ -17,7 +23,7 @@ const { imgRuta, title, value } = Astro.props;
       <h3>{title}</h3>
     </div>
     <div class="operations">
-      <div class="btn-operation" id="decrement">
+      <div class="btn-operation" id={decrementButtonId}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
           ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -25,8 +31,8 @@ const { imgRuta, title, value } = Astro.props;
           ></path></svg
         >
       </div>
-      <span class="counter" id="counter">1</span>
-      <div class="btn-operation" id="increment">
+      <span class="counter" id={counterId}>1</span>
+      <div class="btn-operation" id={incrementButtonId}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
           ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -37,22 +43,21 @@ const { imgRuta, title, value } = Astro.props;
     </div>
   </div>
   <div class="result">
-    $ <span id="final-value">{value}</span>
+    $ <span id={valueId}>{value}</span>
   </div>
 </div>
 
-<script>
-  let counter = document.getElementById("counter") as HTMLDivElement;
-  let incrementButton = document.getElementById(
-    "increment"
-  ) as HTMLButtonElement;
-  let decrementButton = document.getElementById(
-    "decrement"
-  ) as HTMLButtonElement;
-  let value = document.getElementById("final-value") as HTMLDivElement;
+<script
+  define:vars={{ counterId, incrementButtonId, decrementButtonId, valueId }}
+>
+  let counter = document.getElementById(counterId);
+  let incrementButton = document.getElementById(incrementButtonId);
+  let decrementButton = document.getElementById(decrementButtonId);
+  let value = document.getElementById(valueId);
   let baseValue = parseInt(value.textContent || "0");
 
   incrementButton?.addEventListener("click", function () {
+    console.log("heyyy");
     let currentValue = parseInt(counter.textContent || "0");
     if (!isNaN(currentValue)) {
       counter.textContent = (currentValue + 1).toString();
@@ -64,6 +69,7 @@ const { imgRuta, title, value } = Astro.props;
   });
 
   decrementButton?.addEventListener("click", function () {
+    console.log("heyyy");
     let currentValue = parseInt(counter.textContent || "0");
     if (!isNaN(currentValue) && currentValue > 1) {
       counter.textContent = (currentValue - 1).toString();

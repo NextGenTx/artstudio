@@ -3,16 +3,19 @@ import CartProduct from "./CartProduct.astro";
 
 const ProductsData = [
   {
+    id: 1,
     rutaImg: "./collage.jpg",
     title: "Collage tempuria",
     value: 25000,
   },
   {
+    id: 2,
     rutaImg: "./collage.jpg",
     title: "Temperas estela",
     value: 35000,
   },
   {
+    id: 3,
     rutaImg: "./collage.jpg",
     title: "Monalisa astro",
     value: 100000,
@@ -30,6 +33,7 @@ const ProductsData = [
         {
           ProductsData.map((item) => (
             <CartProduct
+              id={item.id}
               imgRuta={item.rutaImg}
               title={item.title}
               value={item.value}
