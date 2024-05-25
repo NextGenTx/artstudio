@@ -27,42 +27,42 @@
     </div>
   </div>
   <div class="result">
-    <p><span>$</span>25.00</p>
+    $ <span id="final-value">25000</span>
   </div>
 </div>
 
 <script>
-  var counter = document.getElementById("counter");
-  var incrementButton = document.getElementById("increment");
-  var decrementButton = document.getElementById("decrement");
+  let counter = document.getElementById("counter") as HTMLDivElement;
+  let incrementButton = document.getElementById(
+    "increment"
+  ) as HTMLButtonElement;
+  let decrementButton = document.getElementById(
+    "decrement"
+  ) as HTMLButtonElement;
+  let value = document.getElementById("final-value") as HTMLDivElement;
+  let baseValue = parseInt(value.textContent || "0");
 
-  if (incrementButton != null) {
-    incrementButton.addEventListener("click", function () {
-      console.log("hey");
-      if (counter != null) {
-        if (counter.textContent != null) {
-          var currentValue = parseInt(counter.textContent);
-          if (!isNaN(currentValue)) {
-            counter.textContent = (currentValue + 1).toString();
-          }
-        }
+  incrementButton?.addEventListener("click", function () {
+    let currentValue = parseInt(counter.textContent || "0");
+    if (!isNaN(currentValue)) {
+      counter.textContent = (currentValue + 1).toString();
+      if (!isNaN(baseValue)) {
+        let finalValue = baseValue * parseInt(counter.textContent || "0");
+        value.textContent = finalValue.toString();
       }
-    });
-  }
+    }
+  });
 
-  if (decrementButton != null) {
-    decrementButton.addEventListener("click", function () {
-      if (counter != null) {
-        console.log(counter);
-        if (counter.textContent != null) {
-          var currentValue = parseInt(counter.textContent);
-          if (!isNaN(currentValue)) {
-            counter.textContent = (currentValue - 1).toString();
-          }
-        }
+  decrementButton?.addEventListener("click", function () {
+    let currentValue = parseInt(counter.textContent || "0");
+    if (!isNaN(currentValue) && currentValue > 1) {
+      counter.textContent = (currentValue - 1).toString();
+      if (!isNaN(baseValue)) {
+        let finalValue = baseValue * parseInt(counter.textContent || "0");
+        value.textContent = finalValue.toString();
       }
-    });
-  }
+    }
+  });
 </script>
 
 <style>
@@ -133,10 +133,11 @@
     font-size: 25px;
   }
   .result {
+    color: #ffb24e;
     position: absolute;
     right: 20px;
   }
   .result span {
-    color: #ffb24e;
+    color: #000;
   }
 </style>
