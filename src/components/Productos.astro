@@ -17,14 +17,16 @@ const products = [
   { id: 14, name: 'Producto 14', price: '$140' },
   { id: 15, name: 'Producto 15', price: '$150' },
 ];
-
 ---
+
 <div class="product-grid">
     {products.map(product => (
-      <div class="product-item" key={product.id}>
+      <div class="product-item" >
         <h2>{product.name}</h2>
         <p>{product.price}</p>
+        <button class="boton">Añadir al carrito</button>
       </div>
+      
     ))}
   </div>
 
@@ -35,14 +37,19 @@ const products = [
     grid-template-rows: repeat(5, auto);
     gap: 1rem;
     width: 50%;
-    margin: auto;
-    background-color: black;
+    margin: left;
   }
 
   .product-item {
+    font-family: "Monserrat", sans-serif;
+    color: black;
     border: 1px solid #ccc;
     padding: 1rem;
     text-align: left;
+  }
+
+  .boton {
+    
   }
 </style>
 
