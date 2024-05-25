@@ -7,7 +7,7 @@
       <h3>Pintura flor de loto</h3>
     </div>
     <div class="operations">
-      <div class="btn-operation plus">
+      <div class="btn-operation" id="decrement">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
           ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -15,8 +15,8 @@
           ></path></svg
         >
       </div>
-      <span class="counter">1</span>
-      <div class="btn-operation minus">
+      <span class="counter" id="counter">1</span>
+      <div class="btn-operation" id="increment">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
           ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
@@ -30,6 +30,40 @@
     <p><span>$</span>25.00</p>
   </div>
 </div>
+
+<script>
+  var counter = document.getElementById("counter");
+  var incrementButton = document.getElementById("increment");
+  var decrementButton = document.getElementById("decrement");
+
+  if (incrementButton != null) {
+    incrementButton.addEventListener("click", function () {
+      console.log("hey");
+      if (counter != null) {
+        if (counter.textContent != null) {
+          var currentValue = parseInt(counter.textContent);
+          if (!isNaN(currentValue)) {
+            counter.textContent = (currentValue + 1).toString();
+          }
+        }
+      }
+    });
+  }
+
+  if (decrementButton != null) {
+    decrementButton.addEventListener("click", function () {
+      if (counter != null) {
+        console.log(counter);
+        if (counter.textContent != null) {
+          var currentValue = parseInt(counter.textContent);
+          if (!isNaN(currentValue)) {
+            counter.textContent = (currentValue - 1).toString();
+          }
+        }
+      }
+    });
+  }
+</script>
 
 <style>
   .product-container {
