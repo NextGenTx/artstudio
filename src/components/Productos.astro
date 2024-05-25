@@ -1,34 +1,35 @@
 ---
 // src/components/Productos.astro
 const products = [
-  { id: 1, ruta: '', name: 'Producto 1', price: '$10' },
-  { id: 2, ruta: '', name: 'Producto 2', price: '$20' },
-  { id: 3, ruta: '', name: 'Producto 3', price: '$30' },
-  { id: 4, ruta: '', name: 'Producto 4', price: '$40' },
-  { id: 5, ruta: '', name: 'Producto 5', price: '$50' },
-  { id: 6, ruta: '', name: 'Producto 6', price: '$60' },
-  { id: 7, ruta: '', name: 'Producto 7', price: '$70' },
-  { id: 8, ruta: '', name: 'Producto 8', price: '$80' },
-  { id: 9, ruta: '', name: 'Producto 9', price: '$90' },
-  { id: 10, ruta: '', name: 'Producto 10', price: '$100' },
-  { id: 11, ruta: '', name: 'Producto 11', price: '$110' },
-  { id: 12, ruta: '', name: 'Producto 12', price: '$120' },
-  { id: 13, ruta: '', name: 'Producto 13', price: '$130' },
-  { id: 14, ruta: '', name: 'Producto 14', price: '$140' },
-  { id: 15, ruta: '', name: 'Producto 15', price: '$150' },
+  { id: 1, ruta: '/collage.jpg', name: 'Producto 1', descripcion: 'Arte', price: '$10.000' },
+  { id: 2, ruta: '/pinturaojo.jpg', name: 'Producto 2', descripcion: 'Arte', price: '$20' },
+  { id: 3, ruta: '/buho.jpg', name: 'Producto 3', descripcion: 'Arte', price: '$30' },
+  { id: 4, ruta: '/galaxia.jpg', name: 'Producto 4', descripcion: 'Arte', price: '$40' },
+  { id: 5, ruta: '/paisaje.jpg', name: 'Producto 5', descripcion: 'Arte', price: '$50' },
+  { id: 6, ruta: '/rompecabezas.jpg', name: 'Producto 6', descripcion: 'Arte', price: '$60' },
+  { id: 7, ruta: '/pintura_amarilla.jpg', name: 'Producto 7', descripcion: 'Pintura', price: '$70' },
+  { id: 8, ruta: '/pintura_azul.jpg', name: 'Producto 8', descripcion: 'Pintura', price: '$80' },
+  { id: 9, ruta: '/pintura_roja.jpg', name: 'Producto 9', descripcion: 'Pintura', price: '$90' },
+  { id: 10, ruta: '/pintura_verde.jpg', name: 'Producto 10', descripcion: 'Pintura', price: '$100' },
+  { id: 11, ruta: '/caballete.jpg', name: 'Producto 11', descripcion: 'Caballete', price: '$110' },
+  { id: 12, ruta: 'lienzo.jpg', name: 'Producto 12', descripcion: 'Lienzo', price: '$120' },
+
 ];
 ---
 
 <div class="product-grid">
-    
-    {products.map(product => (
-      <div class="product-item" >
-        <h2>{product.name}</h2>
-        <p>{product.price}</p>
-        <button class="boton">Añadir al carrito</button>
+  {products.map(product => (
+    <div class="product-item">
+      <img src={product.ruta} alt={product.name} class="imagen" />
+      <h2>{product.name}</h2>
+      <h3>{product.descripcion}</h3>
+      <div class="price-container">
+        <p class="product-price">{product.price}</p>
+        <button class="boton"></button>
       </div>
-    ))
-  }
+      
+    </div>
+  ))}
 </div>
 
 <style>
@@ -39,21 +40,77 @@ const products = [
     gap: 1rem;
     width: 70%;
     padding: 0px 30px;
+    margin: auto;
   }
 
   .product-item {
-    font-family: "Monserrat", sans-serif;
-    color: black;
-    border: 1px solid #ccc;
+    position: relative;
     padding: 1rem;
+    text-align: center;
+  }
+
+  .product-item h2 {
+    font-family: "Monserrat", sans-serif;
+    font-size: 30px;
+    color: black;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-item h3 {
+    font-family: "Monserrat", sans-serif;
+    font-weight: lighter;
+    font-size: 15px;
+    color: black;
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: left;
+    margin: 10px 0px;
+  }
+
+  .price-container p {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
     text-align: left;
   }
 
   .boton {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffb24e;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 0;
+  }
 
+  .boton:before {
+    content: "+";
   }
 
   .imagen {
-
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border-radius: 2%;
   }
 </style>
