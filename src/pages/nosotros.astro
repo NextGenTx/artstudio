@@ -1,0 +1,162 @@
+---
+// src/pages/nosotros.astro
+---
+<head>
+  <meta charset="utf-8">
+  <title>Nosotros</title>
+</head>
+
+<div class="main-container">
+  <div class="logo">
+    <h3><span>Art</span>Studio</h3>
+  </div>
+  <div class="menu">
+    <ul>
+      <li><a href="/">Productos</a></li>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="inicio_sesion">Iniciar sesión</a></li>
+    </ul>
+  </div>
+</div>
+  
+  <div class="nosotros-container">
+    <div class="nosotros-text">
+      <h2>Sobre Nosotros</h2>
+      <p>
+        Artstudio es una tienda enfocada en la venta de material para hacer pinturas y también pinturas 
+        realizadas por nosotros mismos, desde copias de pinturas muy importantes hasta pinturas de tus personajes favoritos.
+      </p>
+      <p>
+        En esta tienda web podrás encontrar material para poder comenzar a pintar, arte que seguramente te gustará tener 
+        en el hogar y también formas de pinturas para que solo tengas que pintar la figura o también puedes hacerlo 
+        colocando puntos de colores.
+      </p>
+    </div>
+    <div class="nosotros-image">
+      <img src="/imagen_nosotros.jpg" alt="Nosotros" />
+    </div>
+  </div>
+  
+  <style>
+    /* Navbar styles */
+    .main-container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80px;
+  }
+
+  .logo span {
+    color: #ffb24e;
+  }
+
+  .logo h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    margin: 0px;
+    margin-left: 40px;
+  }
+
+  .menu {
+    font-size: 18px;
+    margin-right: 40px;
+  }
+  .menu ul {
+    list-style: none;
+  }
+  .menu li {
+    display: inline;
+  }
+  .menu a {
+    font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+    font-weight: 500;
+    color: #000;
+    padding: 0px 10px;
+  }
+  .menu a:hover {
+    color: #ffb24e;
+    transition: 0.8s;
+  }
+  
+    /* Nosotros page styles */
+    .nosotros-container {
+      display: flex;
+      padding: 50px 10%;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .nosotros-text {
+      flex: 1;
+      max-width: 50%;
+    }
+  
+    .nosotros-text h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 24px;
+      color: #333;
+    }
+  
+    .nosotros-text p {
+      font-family: "Quicksand", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #666;
+    }
+  
+    .nosotros-image {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding-left: 50px; /* Adjust as needed */
+    }
+  
+    .nosotros-image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px; /* Adjust height as needed */
+      border-radius: 8px; /* Optional: Rounded corners */
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Box shadow */
+    }
+  
+    /* ajustes de responsive */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+        height: auto;
+      }
+  
+      .logo h3 {
+        margin-left: 0;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+  
+      .menu {
+        margin: 0;
+        text-align: center;
+      }
+  
+      .nosotros-container {
+        flex-direction: column;
+        padding: 30px 5%;
+      }
+  
+      .nosotros-text,
+      .nosotros-image {
+        max-width: 100%;
+        padding: 0;
+      }
+  
+      .nosotros-image {
+        justify-content: center;
+        padding-top: 20px;
+      }
+    }
+  </style>
+  

@@ -5,22 +5,62 @@ const ProductsData = [
   {
     id: 1,
     rutaImg: "./collage.jpg",
-    title: "Collage tempuria",
+    title: "Bella Duna",
     value: 25000,
+    quantity: 1,
   },
   {
     id: 2,
     rutaImg: "./paisaje.jpg",
-    title: "Temperas estela",
+    title: "Paisaje Calm",
     value: 35000,
+    quantity: 1,
   },
   {
     id: 3,
     rutaImg: "./galaxia.jpg",
-    title: "Monalisa astro",
+    title: "Galaxy Gogh",
     value: 100000,
+    quantity: 1,
   },
 ];
+
+let subtotal = ProductsData.reduce((acc, curr) => acc + curr.value * curr.quantity, 0);
+let total = subtotal + 20000; // 20000 es el costo de envío fijo
+
+// Función para incrementar la cantidad de un producto
+function handleIncrement(id: number) {
+  ProductsData.forEach(product => {
+    if (product.id === id) {
+      product.quantity++;
+      subtotal += product.value;
+      total += product.value;
+    }
+  });
+}
+
+// Función para decrementar la cantidad de un producto
+function handleDecrement(id: number) {
+  ProductsData.forEach(product => {
+    if (product.id === id && product.quantity > 1) {
+      product.quantity--;
+      subtotal -= product.value;
+      total -= product.value;
+    }
+  });
+}
+
+// Función para eliminar un producto del carrito
+function handleRemove(id: number) {
+  const index = ProductsData.findIndex(product => product.id === id);
+  if (index !== -1) {
+    const product = ProductsData[index];
+    subtotal -= product.value * product.quantity;
+    total -= product.value * product.quantity;
+    ProductsData.splice(index, 1);
+  }
+}
+
 ---
 
 <div class="main-container-cart">
@@ -37,9 +77,19 @@ const ProductsData = [
               imgRuta={item.rutaImg}
               title={item.title}
               value={item.value}
+              quantity={item.quantity}
             />
           ))
         }
+      </div>
+      <div class="subtotal">
+        <p>Subtotal: ${subtotal}</p>
+      </div>
+      <div class="shipping-cost">
+        <p>Costo de envío: $20,000</p>
+      </div>
+      <div class="total">
+        <p>Total: ${total}</p>
       </div>
     </div>
   </div>
@@ -64,6 +114,8 @@ const ProductsData = [
   }
   .content {
     margin: 15px;
+    height: calc(100% - 50px);
+    position: relative;
   }
   .title h3 {
     font-family: "Montserrat", sans-serif;
@@ -72,6 +124,18 @@ const ProductsData = [
   }
   .products-container {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+    padding-right: 15px;
+  }
+  .subtotal, .shipping-cost, .total {
+    bottom: 10px;
+    right: 15px;
+  }
+  .subtotal p, .shipping-cost p, .total p {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 5px 0;
   }
 </style>

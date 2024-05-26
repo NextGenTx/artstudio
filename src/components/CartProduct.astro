@@ -4,6 +4,7 @@ export interface Props {
   imgRuta: string;
   title: string;
   value: number;
+  quantity: number
 }
 
 const { id, imgRuta, title, value } = Astro.props;
@@ -11,8 +12,11 @@ const { id, imgRuta, title, value } = Astro.props;
 let counterId = `counter-${id}`;
 let incrementButtonId = `increment-${id}`;
 let decrementButtonId = `decrement-${id}`;
+let removeId = `remove-${id}`;
 let valueId = `final-value-${id}`;
+
 ---
+
 
 <div class="product-container">
   <div class="img-container">
@@ -40,6 +44,12 @@ let valueId = `final-value-${id}`;
           ></path></svg
         >
       </div>
+      <div class="btn-remove" id={removeId}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="result">
@@ -48,13 +58,14 @@ let valueId = `final-value-${id}`;
 </div>
 
 <script
-  define:vars={{ counterId, incrementButtonId, decrementButtonId, valueId }}
+  define:vars={{ counterId, incrementButtonId, decrementButtonId, valueId, removeId }}
 >
   let counter = document.getElementById(counterId);
   let incrementButton = document.getElementById(incrementButtonId);
   let decrementButton = document.getElementById(decrementButtonId);
   let value = document.getElementById(valueId);
   let baseValue = parseInt(value.textContent || "0");
+  let removeButton = document.getElementById(removeId)
 
   incrementButton?.addEventListener("click", function () {
     console.log("heyyy");
@@ -78,6 +89,12 @@ let valueId = `final-value-${id}`;
         value.textContent = finalValue.toString();
       }
     }
+  });
+
+  removeButton?.addEventListener("click", function () {
+    // Función para eliminar el producto del carrito
+    let productContainer = document.querySelector(`#${counterId}`).closest('.product-container');
+    productContainer.remove();
   });
 </script>
 
@@ -145,6 +162,31 @@ let valueId = `final-value-${id}`;
     cursor: pointer;
     transition: 0.8s;
   }
+
+  .btn-remove{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    height: 15px;
+    width: 15px;
+    padding: 5px;
+    border: 3px solid #000;
+    border-radius: 12px;
+    margin: 0px 15px;
+  }
+
+  .btn-remove:hover {
+    color: #ffb24e;
+    border-color: #ffb24e;
+    cursor: pointer;
+    transition: 0.8s;
+  }
+  .btn-remove:hover svg {
+    fill: #ffb24e;
+    cursor: pointer;
+    transition: 0.8s;
+  }
+
   .counter {
     font-weight: 500;
     font-size: 25px;

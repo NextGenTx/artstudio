@@ -1,42 +1,55 @@
 ---
 // src/components/Productos.astro
 const products = [
-  { id: 1, ruta: '/collage.jpg', name: 'Producto 1', descripcion: 'Arte', price: '$10.000' },
-  { id: 2, ruta: '/pinturaojo.jpg', name: 'Producto 2', descripcion: 'Arte', price: '$20' },
-  { id: 3, ruta: '/buho.jpg', name: 'Producto 3', descripcion: 'Arte', price: '$30' },
-  { id: 4, ruta: '/galaxia.jpg', name: 'Producto 4', descripcion: 'Arte', price: '$40' },
-  { id: 5, ruta: '/paisaje.jpg', name: 'Producto 5', descripcion: 'Arte', price: '$50' },
-  { id: 6, ruta: '/rompecabezas.jpg', name: 'Producto 6', descripcion: 'Arte', price: '$60' },
-  { id: 7, ruta: '/pintura_amarilla.jpg', name: 'Producto 7', descripcion: 'Pintura', price: '$70' },
-  { id: 8, ruta: '/pintura_azul.jpg', name: 'Producto 8', descripcion: 'Pintura', price: '$80' },
-  { id: 9, ruta: '/pintura_roja.jpg', name: 'Producto 9', descripcion: 'Pintura', price: '$90' },
-  { id: 10, ruta: '/pintura_verde.jpg', name: 'Producto 10', descripcion: 'Pintura', price: '$100' },
-  { id: 11, ruta: '/caballete.jpg', name: 'Producto 11', descripcion: 'Caballete', price: '$110' },
-  { id: 12, ruta: 'lienzo.jpg', name: 'Producto 12', descripcion: 'Lienzo', price: '$120' },
-
+  { id: 1, ruta: '/collage.jpg', name: 'Bella Duna', descripcion: 'Arte', quantity: 10, price: 10000 },
+  { id: 2, ruta: '/pinturaojo.jpg', name: 'Natural Eyes', descripcion: 'Arte', quantity: 10, price: 20 },
+  { id: 3, ruta: '/buho.jpg', name: 'Buho Arti', descripcion: 'Arte', quantity: 10, price: 30 },
+  { id: 4, ruta: '/galaxia.jpg', name: 'Galaxy Gogh', descripcion: 'Arte', quantity: 10, price: 40 },
+  { id: 5, ruta: '/paisaje.jpg', name: 'Paisaje Calm', descripcion: 'Arte', quantity: 10, price: 50 },
+  { id: 6, ruta: '/rompecabezas.jpg', name: 'Different', descripcion: 'Arte', quantity: 10, price: 60 },
+  { id: 7, ruta: '/pintura_amarilla.jpg', name: 'Pintura Amarilla', descripcion: 'Pintura', quantity: 1, price: 70 },
+  { id: 8, ruta: '/pintura_azul.jpg', name: 'Pintura Azul', descripcion: 'Pintura', quantity: 10, price: 80 },
+  { id: 9, ruta: '/pintura_roja.jpg', name: 'Pintura Roja', descripcion: 'Pintura', quantity: 10, price: 90 },
+  { id: 10, ruta: '/pintura_verde.jpg', name: 'Pintura Verde', descripcion: 'Pintura', quantity: 10, price: 100 },
+  { id: 11, ruta: '/caballete.jpg', name: 'Caballete Grande', descripcion: 'Caballete', quantity: 10, price: 110 },
+  { id: 12, ruta: '/lienzo.jpg', name: 'Lienzo Grande', descripcion: 'Lienzo', quantity: 10, price: 120 },
 ];
 ---
-
 <div class="product-grid">
   {products.map(product => (
     <div class="product-item">
       <img src={product.ruta} alt={product.name} class="imagen" />
       <h2>{product.name}</h2>
       <h3>{product.descripcion}</h3>
+      <h4>Cantidad: {product.quantity}</h4>
       <div class="price-container">
         <p class="product-price">{product.price}</p>
-        <button class="boton"></button>
+        <button class="boton" data-product={JSON.stringify(product)}>+</button>
       </div>
-      
     </div>
   ))}
 </div>
+
+<script>
+  // script para manejar el evento click
+  import addToCart from "./Cart.astro"
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('boton')) {
+      const productData = target.getAttribute('data-product');
+      if (productData) {
+        const product = JSON.parse(productData);
+        addToCart(product);
+      }
+    }
+  });
+</script>
 
 <style>
   .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(4, auto);
     gap: 1rem;
     width: 70%;
     padding: 0px 30px;
@@ -50,7 +63,7 @@ const products = [
   }
 
   .product-item h2 {
-    font-family: "Monserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 30px;
     color: black;
     text-align: left;
@@ -58,9 +71,18 @@ const products = [
   }
 
   .product-item h3 {
-    font-family: "Monserrat", sans-serif;
-    font-weight: lighter;
-    font-size: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .product-item h4 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
     color: black;
     text-align: left;
     margin-top: 5px;
@@ -80,13 +102,6 @@ const products = [
     margin: 10px 0px;
   }
 
-  .price-container p {
-    font-family: "Quicksand", sans-serif;
-    font-weight: bold;
-    font-size: 25px;
-    text-align: left;
-  }
-
   .boton {
     width: 30px;
     height: 30px;
@@ -97,13 +112,16 @@ const products = [
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     font-size: 18px;
     line-height: 0;
+    cursor: pointer; /* Añadido para indicar que es un botón interactivo */
   }
 
-  .boton:before {
-    content: "+";
+  .boton:hover {
+    color: white;
+    background-color: black;
+    border-color: #ffb24e;
+    transition: 0.8s;
   }
 
   .imagen {

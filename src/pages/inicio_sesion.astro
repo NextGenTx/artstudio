@@ -1,0 +1,188 @@
+---
+---
+<head>
+    <meta charset="utf-8">
+    <title>Nosotros</title>
+</head>
+
+<div class="login-container">
+    <div class="back-arrow">
+      <a href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+          <path d="M257.5 445.1c12.4-12.4 12.4-32.8 0-45.2L154.7 296H424c17.7 0 32-14.3 32-32s-14.3-32-32-32H154.7l102.8-103.9c12.4-12.4 12.4-32.8 0-45.2s-32.8-12.4-45.2 0L45.3 239c-12.4 12.4-12.4 32.8 0 45.2L212.3 445c12.4 12.4 32.8 12.4 45.2 0z"/>
+        </svg>
+      </a>
+    </div>
+    
+    <div class="login-box">
+      <h1>Iniciar Sesión</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Nombre:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+      <div id="toggle-form">
+        <button id="register-toggle">Registro</button>
+      </div>
+    </div>
+  
+    <div class="register-box">
+      <h1>Registro</h1>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="reg-username">Nombre:</label>
+          <input type="text" id="reg-username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Correo:</label>
+          <input type="email" id="reg-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Contraseña:</label>
+          <input type="password" id="reg-password" name="password" required>
+        </div>
+        <button type="submit">Registrarse</button>
+      </form>
+      <div id="toggle-form">
+        <button id="login-toggle">Iniciar Sesión</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+  
+      if (username === 'admin' && password === '123*') {
+        localStorage.setItem('isAdmin', 'true');
+        alert('Inicio de sesión exitoso');
+        window.location.href = '/admin_products';
+      } else {
+        localStorage.setItem('isAdmin', 'false');
+        alert('Inicio de sesión exitoso');
+        window.location.href = '/';
+      }
+    });
+  
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      // Aquí puedes añadir lógica para registrar el usuario
+      alert('Registro exitoso');
+      window.location.href = '/';
+    });
+  
+    document.getElementById('register-toggle').addEventListener('click', function() {
+      document.querySelector('.login-box').style.display = 'none';
+      document.querySelector('.register-box').style.display = 'block';
+    });
+  
+    document.getElementById('login-toggle').addEventListener('click', function() {
+      document.querySelector('.login-box').style.display = 'block';
+      document.querySelector('.register-box').style.display = 'none';
+    });
+  
+    // Inicialmente muestra el formulario de inicio de sesión y oculta el de registro
+    document.querySelector('.login-box').style.display = 'block';
+    document.querySelector('.register-box').style.display = 'none';
+  </script>
+  
+  <style>
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+  
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  
+    .back-arrow a {
+      color: #ffb24e;
+      text-decoration: none;
+    }
+  
+    .back-arrow svg {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .login-box,
+    .register-box {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+  
+    .login-box h1,
+    .register-box h1 {
+      margin-bottom: 20px;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+  
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+  
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ffb24e;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  
+    button:hover {
+      background-color: #ffa500;
+    }
+  
+    #toggle-form {
+      margin-top: 10px;
+    }
+  
+    #toggle-form button {
+      background-color: transparent;
+      color: #ffb24e;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+  
+    #toggle-form button:hover {
+      color: #ffa500;
+    }
+  </style>
+  
